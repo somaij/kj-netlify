@@ -4,6 +4,7 @@ import { Link } from "gatsby"
 import { GatsbyImage } from "gatsby-plugin-image"
 
 const PostCard = ({ data }) => (
+  <Link to={data.frontmatter.slug}>
   <article
     className="post-card"
     sx={{
@@ -11,26 +12,21 @@ const PostCard = ({ data }) => (
     }}
   >
     {data.frontmatter.featuredImage ? (
-      <Link to={data.frontmatter.slug}>
+      
         <GatsbyImage
           image={data.frontmatter.featuredImage.childImageSharp.gatsbyImageData}
           alt={data.frontmatter.title + " - Featured image"}
           className="featured-image"
         />
-      </Link>
+      
     ) : (
       ""
     )}
     <div className="post-content">
-      <h2 className="title">
-        <Link
-          to={data.frontmatter.slug}
-          sx={{
-            variant: "links.postLink",
-          }}
-        >
+      <h2 className="title" sx={{
+          color: "muted",
+        }}>
           {data.frontmatter.title}
-        </Link>
       </h2>
       <p
         className="meta"
@@ -38,10 +34,12 @@ const PostCard = ({ data }) => (
           color: "muted",
         }}
       >
-        <time>{data.frontmatter.date}</time>
+        {data.excerpt}
       </p>
+      <span className="button -outline">Read Now</span>
     </div>
   </article>
+  </Link>
 )
 
 export default PostCard
